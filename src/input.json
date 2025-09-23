@@ -1,0 +1,13 @@
+{
+  "numOfPas": 3,
+  "weightOfPas": {
+    "0": 60,
+    "1": 80,
+    "2": 70,
+    "3": 90
+  },
+  "weight": 2400,
+  "model": "zeekr",
+  "typeOptions": 1,
+  "maxSpeed": 250
+}
