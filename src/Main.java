@@ -514,7 +514,7 @@ class Transport {
         showNumOfTrans();
 
         for (int i = 0; i < transportList.size(); i++) {
-            exportJson("unnamed" + i, transportList.get(i));
+            exportJson(transportList.get(i).getModel() + "_" + i, transportList.get(i));
         }
 
         exportJson("t", t);
