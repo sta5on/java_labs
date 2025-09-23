@@ -1,7 +1,8 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+import java.io.*;
 import java.util.Random;
 import java.util.Vector;
 
@@ -13,14 +14,28 @@ class Transport {
     static int numOfTrans = 0;
     String model;
     String typeOf;
+    int typeOption;
     String[] typeOptions = {"car", "autobus", "plane"};
     int maxSpeed;
 
     final static int maxWeight = 150;
 
+    //' '(java.lang.String, int, int, int, int, int[])'
+    // return new TransportData(model, numOfPas, weight, typeOptions, maxSpeed, weightOfPas);
+    public Transport(String model, int numOfPas, int weight, int typeOption, int maxSpeed, int[] weightOfPas) {
+        this.model = model;
+        this.numOfPas = numOfPas;
+        this.weight = weight;
+        this.typeOf = typeOptions[typeOption];
+        this.typeOption = typeOption;
+        this.maxSpeed = maxSpeed;
+        this.weightOfPas = weightOfPas;
+    }
+
     public Transport() {
         this.model = "tesla";
-        this.typeOf = typeOptions[0];
+        this.typeOption = 0;
+        this.typeOf = typeOptions[typeOption];
         numOfTrans++;
         this.id = numOfTrans;
         this.numOfPas = 0;
@@ -30,6 +45,7 @@ class Transport {
     public Transport(Transport other) {
         this.model = other.model;
         this.typeOf = other.typeOf;
+        this.typeOption = other.typeOption;
         this.numOfPas = other.numOfPas;
         this.weight = other.weight;
         this.maxSpeed = other.maxSpeed;
@@ -45,8 +61,10 @@ class Transport {
         this.model = model;
         if (typeOption >= 0 && typeOption < typeOptions.length) {
             this.typeOf = typeOptions[typeOption];
+            this.typeOption = typeOption;
         } else {
             this.typeOf = typeOptions[0];
+            this.typeOption = 0;
         }
         this.maxSpeed = maxSpeed;
         numOfTrans++;
@@ -98,6 +116,10 @@ class Transport {
     // + | setModel
     // + | setTypeOf
     // + | getTypeOf
+
+    int getTypeOption() {
+        return this.typeOption;
+    }
 
     void setWeight(int weight) {
         this.weight = weight;
@@ -360,7 +382,54 @@ class Transport {
         }
     }
 
-    public static void main(String[] args) {
+    public record TransportData(String model, int numOfPas, int weight, int typeOptions, int maxSpeed, int[] weightOfPas) {}
+
+    public static TransportData parseJson(String path) throws Exception {
+        JSONObject j = (JSONObject) new JSONParser().parse(new FileReader(path));
+
+        String model = (String) j.get("model");
+        int numOfPas = ((Long) j.get("numOfPas")).intValue();
+        int weight = ((Long) j.get("weight")).intValue();
+        int typeOptions = ((Long) j.get("typeOptions")).intValue();
+        int maxSpeed = ((Long) j.get("maxSpeed")).intValue();
+
+        JSONArray arr = (JSONArray) j.get("weightOfPas");
+        int[] weightOfPas = new int[arr.size()];
+        for (int i = 0; i < arr.size(); i++) {
+            weightOfPas[i] = ((Long) arr.get(i)).intValue();
+        }
+
+        return new TransportData(model, numOfPas, weight, typeOptions, maxSpeed, weightOfPas);
+    }
+
+    public static void exportJson(String name, Transport t) {
+        // JSON String
+        JSONObject j = new JSONObject();
+        j.put("id", t.getId());
+        j.put("model", t.getModel());
+        j.put("weight", t.getWeight());
+        j.put("typeOf", t.getTypeOf());
+        j.put("maxSpeed", t.getMaxSpeed());
+        j.put("typeOption", t.getTypeOption());
+
+        // JSON Array
+        JSONArray arr = new JSONArray();
+
+        for (int i = 0; i < t.numOfPas; i++) {
+            arr.add(t.weightOfPas[i]);
+        }
+
+        j.put("weightOfPas", arr);
+
+        try (FileWriter fileWriter = new FileWriter(name + ".json")) {
+            fileWriter.write(j.toJSONString());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public static void main(String[] args) throws Exception {
         Transport bmw = new Transport("BMW", 2, 259);
         System.out.println(bmw.getId() + " id ");
         System.out.println(numOfTrans + " count of transport");
@@ -436,8 +505,19 @@ class Transport {
             System.out.println((i + 1) + ". " + transportList.get(i).getModel() + " (" + transportList.get(i).typeOf + ")");
         }
 
+
+        TransportData data = parseJson("src/input.json");
+        Transport t = new Transport(data.model(), data.numOfPas(), data.weight(), data.typeOptions(), data.maxSpeed(), data.weightOfPas());
+
+        t.printAll();
+
         showNumOfTrans();
 
+        for (int i = 0; i < transportList.size(); i++) {
+            exportJson("unnamed" + i, transportList.get(i));
+        }
+
+        exportJson("t", t);
     }
 
 }
