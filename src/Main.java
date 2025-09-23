@@ -430,19 +430,23 @@ class Transport {
     }
 
     public static void main(String[] args) throws Exception {
+        Vector<Transport> transportList = new Vector<>();
         Transport bmw = new Transport("BMW", 2, 259);
         System.out.println(bmw.getId() + " id ");
         System.out.println(numOfTrans + " count of transport");
-
+        transportList.add(bmw);
 
         Transport audi = new Transport("Audi", 0, 259);
         System.out.println(audi.getId() + " id");
         System.out.println(numOfTrans + " count of transport");
+        transportList.add(audi);
 
         Transport empty = new Transport();
+        transportList.add(empty);
         System.out.println(empty.getId() + " id");
         System.out.println(numOfTrans + " count of transport");
         Transport clone = new Transport(bmw);
+        transportList.add(clone);
         System.out.println(clone.getId() + " id");
 
 
@@ -451,15 +455,18 @@ class Transport {
         audi.printAll();
 
         Transport fromKeyboard = new Transport();
+        transportList.add(fromKeyboard);
 //
 //        fromKeyboard.inputData();
 //        fromKeyboard.printAll();
 
         Transport randomValues = new Transport();
+        transportList.add(randomValues);
 
         randomValues.setRandom();
         randomValues.printAll();
         Transport randomValues1 = new Transport();
+        transportList.add(randomValues1);
         randomValues1.setRandom();
 
         randomValues.maxWeightCapacity();
@@ -470,6 +477,7 @@ class Transport {
 
         Transport plane = new Transport("Boeing 747", "plane", 4, new int[]{70, 80, 90, 88}, 18000, 950);
         plane.printAll();
+        transportList.add(plane);
 
         plane.setNumOfPas(6);
 
@@ -491,7 +499,7 @@ class Transport {
 
 
         //+ сделать вектор из эрей лист
-        Vector<Transport> transportList = new Vector<>();
+
 
         Transport transport1 = new Transport();
         transportList.add(transport1);
@@ -500,6 +508,7 @@ class Transport {
         transportList.add(new Transport("Tesla", 0, 250));
         transportList.add(new Transport("Bus Mercedes", 1, 140));
         transportList.add(new Transport("Boeing 737", 2, 900));
+
 
         for (int i = 0; i < transportList.size(); i++) {
             System.out.println((i + 1) + ". " + transportList.get(i).getModel() + " (" + transportList.get(i).typeOf + ")");
@@ -514,10 +523,10 @@ class Transport {
         showNumOfTrans();
 
         for (int i = 0; i < transportList.size(); i++) {
-            exportJson(transportList.get(i).getModel() + "_" + i, transportList.get(i));
+            exportJson(transportList.get(i).getModel() + "_" + (i + 1), transportList.get(i));
+            System.out.println((i+1) + ". " + transportList.get(i).getModel() + " exporting...");
         }
-
-        exportJson("t", t);
+        System.out.println(transportList.size() + " JSON files has exported");
     }
 
 }
