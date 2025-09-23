@@ -403,7 +403,6 @@ class Transport {
     }
 
     public static void exportJson(String name, Transport t) {
-        // JSON String
         JSONObject j = new JSONObject();
         j.put("id", t.getId());
         j.put("model", t.getModel());
@@ -412,7 +411,6 @@ class Transport {
         j.put("maxSpeed", t.getMaxSpeed());
         j.put("typeOption", t.getTypeOption());
 
-        // JSON Array
         JSONArray arr = new JSONArray();
 
         for (int i = 0; i < t.numOfPas; i++) {
@@ -421,7 +419,7 @@ class Transport {
 
         j.put("weightOfPas", arr);
 
-        try (FileWriter fileWriter = new FileWriter(name + ".json")) {
+        try (FileWriter fileWriter = new FileWriter("./exported-data/" + name + ".json")) {
             fileWriter.write(j.toJSONString());
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -517,7 +515,7 @@ class Transport {
 
         TransportData data = parseJson("src/input.json");
         Transport t = new Transport(data.model(), data.numOfPas(), data.weight(), data.typeOptions(), data.maxSpeed(), data.weightOfPas());
-
+        transportList.add(t);
         t.printAll();
 
         showNumOfTrans();
