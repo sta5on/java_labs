@@ -102,7 +102,11 @@ class Transport {
     // сделать + | сет и + | гет для веса пассажиров ( конкретно для одного, передается два параметра кого меняем и на что меняем)
     // с гет тоже самое с конкретным пассом
 
+
     public int getWeightOfPas(int Num) {
+        if (Num <= 0) {
+            return 0;
+        }
         return this.weightOfPas[Num];
     }
 
@@ -454,32 +458,56 @@ class Transport {
 
         Transport fromKeyboard = new Transport();
         transportList.add(fromKeyboard);
-//
+
+//        String userChose;
+//        System.out.println("Enter your chose: \nyes - input new transport data\n no - skip");
+//        userChose = inString();
+//        if (userChose.equals("yes")) {
+//            fromKeyboard.inputData();
+//            fromKeyboard.printAll();
+//        }
+////
 //        fromKeyboard.inputData();
 //        fromKeyboard.printAll();
 
-        Transport randomValues = new Transport();
-        transportList.add(randomValues);
-
-        randomValues.setRandom();
-        randomValues.printAll();
-        Transport randomValues1 = new Transport();
-        transportList.add(randomValues1);
-        randomValues1.setRandom();
-
-        randomValues.maxWeightCapacity();
-
-        randomValues.comparePasCount(bmw);
-
-        compareWeightCapacity(randomValues, randomValues1);
+//        Transport randomValues = new Transport();
+//        transportList.add(randomValues);
+//
+//        randomValues.setRandom();
+//        randomValues.printAll();
+//        Transport randomValues1 = new Transport();
+//        transportList.add(randomValues1);
+//        randomValues1.setRandom();
+//
+//        randomValues.maxWeightCapacity();
+//
+//        randomValues.comparePasCount(bmw);
+//
+//        compareWeightCapacity(randomValues, randomValues1);
 
         Transport plane = new Transport("Boeing 747", "plane", 4, new int[]{70, 80, 90, 88}, 18000, 950);
         plane.printAll();
         transportList.add(plane);
 
-        plane.setNumOfPas(6);
+        plane.setNumOfPas(10);
 
         plane.printAll();
+
+
+        // найти транспорт с максимальным возможным весом
+        for (int i = 0; i < (transportList.size() - 1); i++) {
+            int cache = maxWeightCapacityR(transportList.get(i));
+            int transportI;
+
+            if (cache < maxWeightCapacityR(transportList.get(i + 1))) {
+                cache = maxWeightCapacityR(transportList.get(i + 1));
+                transportI = (i + 1);
+            } else {
+                continue;
+            }
+            System.out.println("d2jbife2inue2fnoi \n" + cache + " aaa " + transportI);
+            System.out.println("Max weight capacity transport - " + transportList.get(transportI).getModel());
+        }
 
         System.out.println(bmw.getTypeOf());
         bmw.setTypeOfOption(0);
@@ -491,9 +519,9 @@ class Transport {
         plane.printAll();
         System.out.println("pas 1 has " + plane.getWeightOfPas(1) + " weight");
 
-        compareCapacityOf4(plane, bmw, audi, randomValues);
-
-        CompareWeightCapacityOf4(plane, bmw, audi, randomValues);
+//        compareCapacityOf4(plane, bmw, audi, randomValues);
+//
+//        CompareWeightCapacityOf4(plane, bmw, audi, randomValues);
 
 
         //+ сделать вектор из эрей лист
@@ -525,6 +553,8 @@ class Transport {
             System.out.println((i+1) + ". " + transportList.get(i).getModel() + " exporting...");
         }
         System.out.println(transportList.size() + " JSON files has exported");
+
+        plane.printAll();
     }
 
 }

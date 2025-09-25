@@ -1,8 +1,8 @@
 {
-  "numOfPas": 3,
-  "weightOfPas": [60, 80, 70, 90],
+  "numOfPas": 4,
+  "weightOfPas": [60, 80, 70, 90, 50],
   "weight": 2400,
-  "model": "ivan_bolgari_:)",
+  "model": "javasaafqfeqfqe",
   "typeOptions": 1,
   "maxSpeed": 250
 }
