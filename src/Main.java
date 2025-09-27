@@ -489,23 +489,20 @@ class Transport {
         plane.printAll();
         transportList.add(plane);
 
-        plane.setNumOfPas(10);
+        plane.setNumOfPas(8);
 
         plane.printAll();
 
 
         // найти транспорт с максимальным возможным весом
         for (int i = 0; i < (transportList.size() - 1); i++) {
-            int cache = maxWeightCapacityR(transportList.get(i));
             int transportI;
 
-            if (cache < maxWeightCapacityR(transportList.get(i + 1))) {
-                cache = maxWeightCapacityR(transportList.get(i + 1));
+            if (maxWeightCapacityR(transportList.get(i)) < maxWeightCapacityR(transportList.get(i + 1))) {
                 transportI = (i + 1);
             } else {
                 continue;
             }
-            System.out.println("d2jbife2inue2fnoi \n" + cache + " aaa " + transportI);
             System.out.println("Max weight capacity transport - " + transportList.get(transportI).getModel());
         }
 
