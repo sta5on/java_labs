@@ -20,8 +20,6 @@ class Transport {
 
     final static int maxWeight = 150;
 
-    //' '(java.lang.String, int, int, int, int, int[])'
-    // return new TransportData(model, numOfPas, weight, typeOptions, maxSpeed, weightOfPas);
     public Transport(String model, int numOfPas, int weight, int typeOption, int maxSpeed, int[] weightOfPas) {
         this.model = model;
         this.numOfPas = numOfPas;
@@ -459,31 +457,31 @@ class Transport {
         Transport fromKeyboard = new Transport();
         transportList.add(fromKeyboard);
 
-//        String userChose;
-//        System.out.println("Enter your chose: \nyes - input new transport data\n no - skip");
-//        userChose = inString();
-//        if (userChose.equals("yes")) {
-//            fromKeyboard.inputData();
-//            fromKeyboard.printAll();
-//        }
-////
-//        fromKeyboard.inputData();
-//        fromKeyboard.printAll();
+        String userChose;
+        System.out.println("Enter your chose: \nyes - input new transport data\n no - skip");
+        userChose = inString();
+        if (userChose.equals("yes")) {
+            fromKeyboard.inputData();
+            fromKeyboard.printAll();
+        }
+//
+        fromKeyboard.inputData();
+        fromKeyboard.printAll();
 
-//        Transport randomValues = new Transport();
-//        transportList.add(randomValues);
-//
-//        randomValues.setRandom();
-//        randomValues.printAll();
-//        Transport randomValues1 = new Transport();
-//        transportList.add(randomValues1);
-//        randomValues1.setRandom();
-//
-//        randomValues.maxWeightCapacity();
-//
-//        randomValues.comparePasCount(bmw);
-//
-//        compareWeightCapacity(randomValues, randomValues1);
+        Transport randomValues = new Transport();
+        transportList.add(randomValues);
+
+        randomValues.setRandom();
+        randomValues.printAll();
+        Transport randomValues1 = new Transport();
+        transportList.add(randomValues1);
+        randomValues1.setRandom();
+
+        randomValues.maxWeightCapacity();
+
+        randomValues.comparePasCount(bmw);
+
+        compareWeightCapacity(randomValues, randomValues1);
 
         Transport plane = new Transport("Boeing 747", "plane", 4, new int[]{70, 80, 90, 88}, 18000, 950);
         plane.printAll();
@@ -516,12 +514,9 @@ class Transport {
         plane.printAll();
         System.out.println("pas 1 has " + plane.getWeightOfPas(1) + " weight");
 
-//        compareCapacityOf4(plane, bmw, audi, randomValues);
-//
-//        CompareWeightCapacityOf4(plane, bmw, audi, randomValues);
+        compareCapacityOf4(plane, bmw, audi, randomValues);
 
-
-        //+ сделать вектор из эрей лист
+        CompareWeightCapacityOf4(plane, bmw, audi, randomValues);
 
 
         Transport transport1 = new Transport();
