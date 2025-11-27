@@ -1,6 +1,6 @@
 import java.util.Vector;
 
-public class Main {
+public class MainLab2 {
     public static void main(String[] args) {
         Hero hero = new Hero();
         System.out.println(hero.getHp());

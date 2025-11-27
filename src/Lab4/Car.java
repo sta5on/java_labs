@@ -1,10 +1,5 @@
-package sta5on;
+package Lab4;
 
-import com.sun.jdi.connect.Transport;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.*;
 
 public class Car {

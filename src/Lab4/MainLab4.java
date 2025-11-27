@@ -1,29 +1,28 @@
-package sta5on;
+package Lab4;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-public class Main {
+public class MainLab4 {
 
-    static Car[][] parking;
+    static Lab4.Car[][] parking;
     static int rows, cols;
-    static Car[] lowConsum;
-    static Car[] theNewest;
+    static Lab4.Car[] lowConsum;
+    static Lab4.Car[] theNewest;
 
     static {
 //        cols = (new Random()).nextInt(10) + 1;
 //        rows = (new Random()).nextInt(10) + 1;
         cols = 7;
         rows = 7;
-        parking = new Car[rows][cols];
+        parking = new Lab4.Car[rows][cols];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                parking[i][j] = new Car();
+                parking[i][j] = new Lab4.Car();
             }
         }
-        theNewest = new Car[cols];
-        lowConsum = new Car[rows];
+        theNewest = new Lab4.Car[cols];
+        lowConsum = new Lab4.Car[rows];
     }
 
     public static void main(String[] args) {
@@ -41,7 +40,7 @@ public class Main {
         List<Thread> threadsRows = new ArrayList<>();
 
         for (int i = 0; i < rows; i++) {
-            Thread t = new Thread(new RowTask(i));
+            Thread t = new Thread(new Lab4.RowTask(i));
             t.start();
             threadsRows.add(t);
         }
@@ -66,7 +65,7 @@ public class Main {
         List<Thread> threadsCols = new ArrayList<>();
 
         for (int i = 0; i < cols; i++) {
-            Thread t = new Thread(new ColTask(i));
+            Thread t = new Thread(new Lab4.ColTask(i));
             t.start();
             threadsCols.add(t);
         }

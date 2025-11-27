@@ -1,6 +1,6 @@
-package sta5on;
+package Lab4;
 
-import static sta5on.Main.*;
+import static Lab4.MainLab4.*;
 
 public class RowTask implements Runnable {
 
